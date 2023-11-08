@@ -2,5 +2,9 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "moduleResolution": "node"
-  }
+  },
+  "exclude": [],
+  "include": [
+    "src/**/*"
+  ]
 }

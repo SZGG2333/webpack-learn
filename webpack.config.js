@@ -2,11 +2,16 @@ const path = require('path')
 const EslintPlugin = require('eslint-webpack-plugin')
 const HtmlwebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   entry: './src/index.js',
   mode: 'development',
+  devServer: {
+    hot: true,
+    open: false,
+    port: 8080
+  },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, './dist')
@@ -19,8 +24,8 @@ module.exports = {
           and: [path.join(__dirname, './src/')]
         },
         use: [
-          // 'style-loader',
-          MiniCssExtractPlugin.loader,
+          'style-loader',
+          // MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'less-loader'
@@ -45,12 +50,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          // 'style-loader', 
-          MiniCssExtractPlugin.loader,
+          'style-loader', 
+          // MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1
+              importLoaders: 2
             }
           },
           {
@@ -60,8 +65,17 @@ module.exports = {
             //     plugins: [require('autoprefixer')]
             //   }
             // }
-          }
+          },
+          'less-loader'
         ]
+      },
+      {
+        test: /\.vue$/,
+        use: ['vue-loader']
+      },
+      {
+        test: /\.pug/,
+        use: ['pug-plain-loader']
       }
     ]
   },
@@ -75,5 +89,6 @@ module.exports = {
     }),
     new EslintPlugin(),
     new MiniCssExtractPlugin(),
+    new VueLoaderPlugin()
   ]
 }

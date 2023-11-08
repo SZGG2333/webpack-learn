@@ -1,19 +1,10 @@
 import './index.css';
 import './index.less';
+import App from './index.vue'
 
-const node = document.createElement('div');
+import Vue from 'vue'
 
-node.textContent = 'Hello world';
-
-document.body.appendChild(node);
-
-const debounce = (fn, duration) => {
-  let timer = null
-  return (...args) => {
-    clearTimeout(timer)
-    setTimeout(() => {
-      fn(...args)
-    }, duration)
-  }
-}
+new Vue({
+  render: h => h(App)
+}).$mount('#app')
 
