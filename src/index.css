@@ -1,4 +1,12 @@
 div {
   width: 200px;
   height: 200px;
+  background: red;
+  display: flex;
+  filter: blur(1);
+}
+::placeholder {
+
+  color: gray;
+
 }
